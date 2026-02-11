@@ -1,8 +1,11 @@
+using HotelListing.API.Data;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<HotelListingDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("HotelListingConnectionString")));  //DB IoC
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
