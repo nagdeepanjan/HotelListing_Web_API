@@ -1,5 +1,6 @@
 using HotelListing.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,17 @@ builder.Services.AddDbContext<HotelListingDbContext>(options => options.UseNpgsq
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options=>
+    options.AddDocumentTransformer((document, context, CancellationToken) =>
+    {
+        document.Servers = new List<OpenApiServer>
+        {
+            new OpenApiServer{Url = builder.Configuration["serverUrl"], Description = "Production Server"}
+        };
+        return Task.CompletedTask;
+    })
+    
+    );
 
 var app = builder.Build();
 
