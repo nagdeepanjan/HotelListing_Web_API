@@ -19,8 +19,7 @@ builder.Services.AddOpenApi(options=>
         };
         return Task.CompletedTask;
     })
-    
-    );
+);
 
 var app = builder.Build();
 
