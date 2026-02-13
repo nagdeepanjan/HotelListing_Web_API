@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using HotelListing.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
@@ -8,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<HotelListingDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("HotelListingConnectionString")));  //DB IoC
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi(options=>
     options.AddDocumentTransformer((document, context, CancellationToken) =>
