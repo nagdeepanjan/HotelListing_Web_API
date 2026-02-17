@@ -1,22 +1,18 @@
 @HotelListing.API_HostAddress = https://localhost:7001
 
 
-###
+POST {{HotelListing.API_HostAddress}}/api/countries
+Content-Type: application/json
 
-GET {{HotelListing.API_HostAddress}}/api/hotels
-
-###
-
-@id=1
-GET {{HotelListing.API_HostAddress}}/api/hotels/{{id}}
+{
+"id":14,
+"name": "Thailand",
+  "shortname":"TH"
+ 
+}
 
 ###
 
 GET {{HotelListing.API_HostAddress}}/api/countries
-
-###
-
-
-GET {{HotelListing.API_HostAddress}}/api/countries/4
 
 ###
