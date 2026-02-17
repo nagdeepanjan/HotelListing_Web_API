@@ -2,14 +2,9 @@
 
 namespace HotelListing.API.DTOs.Country
 {
-    public class CreateCountryDto
+    public class UpdateCountryDto: CreateCountryDto
     {
         [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-
-        [Required]
-        [MaxLength(3)]
-        public string ShortName { get; set; }
+        public int Id { get; set; }
     }
 }
