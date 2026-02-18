@@ -1,23 +1,36 @@
 @HotelListing.API_HostAddress = https://localhost:7001
 
 
-GET {{HotelListing.API_HostAddress}}/api/hotels
+GET {{HotelListing.API_HostAddress}}/api/countries
 
 ###
 
-@id=3
-GET {{HotelListing.API_HostAddress}}/api/hotels/{{id}}
+@id=4
+GET {{HotelListing.API_HostAddress}}/api/countries/{{id}}
 
 ###
 
-POST {{HotelListing.API_HostAddress}}/api/hotels
+GET {{HotelListing.API_HostAddress}}/api/countries
+
+###
+
+POST {{HotelListing.API_HostAddress}}/api/countries
 Content-Type: application/json
+
 {
-  
-  "name": "Hotel Ranchi",
-  "address": "Peace Rd",
-  "rating": 3,
-  "countryId": 4
+    "name": "Japan",
+    "shortName": "JP"
+}
+
+###
+
+PUT {{HotelListing.API_HostAddress}}/api/countries/13
+Content-Type: application/json
+
+{
+  "id": 13,
+  "name": "Japan",
+  "shortName": "JPN"
 }
 
 ###
