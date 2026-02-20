@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
+using HotelListing.API.Contracts;
 using HotelListing.API.Data;
+using HotelListing.API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Scalar.AspNetCore;
@@ -13,6 +15,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi(options=>
     options.AddDocumentTransformer((document, context, CancellationToken) =>
@@ -24,6 +27,10 @@ builder.Services.AddOpenApi(options=>
         return Task.CompletedTask;
     })
 );
+
+builder.Services.AddScoped<ICountriesService, CountriesService>();
+
+
 
 var app = builder.Build();
 

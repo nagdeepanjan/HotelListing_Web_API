@@ -1,16 +1,11 @@
 @HotelListing.API_HostAddress = https://localhost:7001
 
-
 GET {{HotelListing.API_HostAddress}}/api/countries
 
 ###
 
-@id=4
+@id=5
 GET {{HotelListing.API_HostAddress}}/api/countries/{{id}}
-
-###
-
-GET {{HotelListing.API_HostAddress}}/api/countries
 
 ###
 
@@ -18,19 +13,26 @@ POST {{HotelListing.API_HostAddress}}/api/countries
 Content-Type: application/json
 
 {
-    "name": "Japan",
-    "shortName": "JP"
+  "name": "New Zealand",
+  "shortName": "NZ",
+  "hotels": []
+
 }
 
 ###
 
-PUT {{HotelListing.API_HostAddress}}/api/countries/13
+PUT {{HotelListing.API_HostAddress}}/api/countries/6
 Content-Type: application/json
 
 {
-  "id": 13,
-  "name": "Japan",
-  "shortName": "JPN"
+  "id": 6,
+    "name": "Chinese",
+    "shortName": "CHN",
+    "hotels": []
 }
+
+###
+
+DELETE {{HotelListing.API_HostAddress}}/api/countries/5
 
 ###
