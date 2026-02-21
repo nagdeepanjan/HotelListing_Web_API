@@ -63,6 +63,4 @@ public class CountriesService(HotelListingDbContext context): ICountriesService
     {
         return await context.Countries.AnyAsync(e => e.Id == id);
     }
-
-
 }

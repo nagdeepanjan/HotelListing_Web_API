@@ -29,6 +29,7 @@ builder.Services.AddOpenApi(options=>
 );
 
 builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddScoped<IHotelsService, HotelsService>();
 
 
 
