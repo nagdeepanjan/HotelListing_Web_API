@@ -1,4 +1,6 @@
-﻿using HotelListing.API.Contracts;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using HotelListing.API.Contracts;
 using HotelListing.API.Data;
 using HotelListing.API.DTOs.Hotel;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing.API.Services;
 
-public class HotelsService(HotelListingDbContext context): IHotelsService
+public class HotelsService(HotelListingDbContext context, IMapper mapper): IHotelsService
 {
     public async Task<IEnumerable<GetHotelsDto>> GetHotelsAsync()
     {
@@ -22,7 +24,8 @@ public class HotelsService(HotelListingDbContext context): IHotelsService
     {
         var hotel = await context.Hotels
             .Where(h => h.Id == id)
-            .Select(h => new GetHotelDto(h.Id, h.Name, h.Address, h.Rating, h.CountryId, h.Country!.Name))
+            .Include(h => h.Country)
+            .ProjectTo<GetHotelDto>(mapper.ConfigurationProvider)                       
             .FirstOrDefaultAsync();
 
         return hotel ?? null;
@@ -45,7 +48,8 @@ public class HotelsService(HotelListingDbContext context): IHotelsService
 
     public async Task<GetHotelDto> CreateHotelAsync(CreateHotelDto hotelDto)
     {
-        var hotel = new Hotel { Name = hotelDto.Name, Address = hotelDto.Address, Rating = hotelDto.Rating, CountryId = hotelDto.CountryId};
+        //var hotel = new Hotel { Name = hotelDto.Name, Address = hotelDto.Address, Rating = hotelDto.Rating, CountryId = hotelDto.CountryId};
+        var hotel = mapper.Map<Hotel>(hotelDto);
 
         context.Hotels.Add(hotel);
         await context.SaveChangesAsync();

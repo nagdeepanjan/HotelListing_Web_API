@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using HotelListing.API.Contracts;
 using HotelListing.API.Data;
+using HotelListing.API.MappingProfiles;
 using HotelListing.API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
@@ -31,7 +32,11 @@ builder.Services.AddOpenApi(options=>
 builder.Services.AddScoped<ICountriesService, CountriesService>();
 builder.Services.AddScoped<IHotelsService, HotelsService>();
 
-
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<HotelMappingProfile>();
+    cfg.AddProfile<CountryMappingProfile>();
+});
 
 var app = builder.Build();
 
